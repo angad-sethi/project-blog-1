@@ -1,4 +1,4 @@
-export const BLOG_TITLE = 'Angad&#39;s blog';
+export const BLOG_TITLE = 'Angad&lsquo;s blog';
 
 export const LIGHT_COLORS = {
   '--color-text': 'hsl(0deg 0% 5%)',
