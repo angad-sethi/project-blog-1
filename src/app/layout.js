@@ -13,8 +13,8 @@ import './styles.css';
 import {cookies} from "next/headers"
 
 export const metadata = {
-  title: 'Bits & Bytes',
-  description:"A wonderful blog about JavaScript"
+  title: `Angad's blog`,
+  description:"A frontend engineering blog"
 };
 
 const mainFont = Work_Sans({
@@ -32,10 +32,9 @@ const monoFont = Spline_Sans_Mono({
 
 
 function RootLayout({ children }) {
-  // TODO: Dynamic theme depending on user preference
-  // const theme = 'light';
+
   const savedTheme = cookies().get("color-theme");
-  const initialTheme = savedTheme?.value ?? "light";
+  const initialTheme = savedTheme?.value ?? "dark";
  
 
   return (

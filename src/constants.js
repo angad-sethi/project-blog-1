@@ -11,7 +11,7 @@ export const LIGHT_COLORS = {
   '--color-secondary-500': 'hsl(328deg 100% 50%)',
   '--color-decorative-100': 'hsl(50deg 100% 94%)',
   '--color-decorative-200': 'hsl(50deg 100% 90%)',
-  '--color-decorative-300': 'hsl(50deg 100% 85%)',
+  '--color-decorative-300': 'white',
   '--color-decorative-500': 'hsl(50deg 100% 70%)',
   '--color-decorative-600': 'hsl(50deg 100% 60%)',
   '--color-decorative-700': 'hsl(50deg 100% 50%)',

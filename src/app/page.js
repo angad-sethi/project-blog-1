@@ -11,7 +11,7 @@ async function Home() {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.mainHeading}>
-        Latest Content:
+        Recently published:
       </h1>
 
       {list.map(list => <BlogSummaryCard

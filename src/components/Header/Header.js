@@ -8,6 +8,7 @@ import VisuallyHidden from '@/components/VisuallyHidden';
 import { LIGHT_TOKENS, DARK_TOKENS } from '@/constants';
 
 import styles from './Header.module.css';
+import Fire from '../Fire';
 
 function Header({ initialTheme, className, ...delegated }) {
   const [theme, setTheme] = React.useState(initialTheme);
@@ -33,9 +34,10 @@ function Header({ initialTheme, className, ...delegated }) {
       {...delegated}
     >
       <Logo />
+      <Fire />
 
       <div className={styles.actions}>
-        <button className={styles.action}>
+          <a href="/rss.xml" className={styles.action}>
           <Rss
             size="1.5rem"
             style={{
@@ -46,7 +48,7 @@ function Header({ initialTheme, className, ...delegated }) {
           <VisuallyHidden>
             View RSS feed
           </VisuallyHidden>
-        </button>
+          </a>
         <button className={styles.action} onClick={flipTheme}>
           {theme == "light"? <Sun size="1.5rem" /> : <Moon size="1.5rem"/>}
           <VisuallyHidden>
