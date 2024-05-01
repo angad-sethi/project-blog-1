@@ -14,7 +14,7 @@ import {cookies} from "next/headers"
 
 export const metadata = {
   title: `Angad's blog`,
-  description:"A frontend engineering blog"
+  description:"A blood ripper frontend engineering blog"
 };
 
 const mainFont = Work_Sans({
