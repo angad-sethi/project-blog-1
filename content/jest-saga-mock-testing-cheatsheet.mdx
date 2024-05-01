@@ -1,0 +1,161 @@
+---
+title: 'Jest/Saga mock testing cheat sheet'
+abstract: We use jest combined with React testing library to test our frontend components, and redux-saga-test-plan to test sagas. When mocking things in tests, be it an API call, saga generator functions or Atlaskit modules. I always seem to forget which mock is the right one for the current use case.
+publishedOn: '2023-09-19T12:00:00-0400'
+---
+
+We use jest combined with React testing library to test our frontend components, and redux-saga-test-plan to test sagas. 🥳
+
+When mocking things in tests, be it an API call, saga generator functions or Atlaskit modules. I always seem to forget which mock is the right one for the current use case.
+Given this problem, I’ve made it easier for myself by _**Note:**mocking up_ this cheatsheet with a 1–2 line explanation about the mock. Hope it helps you too!
+
+## Use case: Mock the implementation of a function defined in another file.
+
+### 1. Using `MockImplementation()`
+
+The function being imported needs to be marked as a `jest.fn()` before we can call `mockImplementation` on it.
+
+```js
+// Import the real function 
+import { getThirdLevelSettings } from "../client/thirdLevel";
+
+// Provide function with correct mock function typing using jest.mocked
+const getThirdLevelSettingsMock = jest.mocked(getThirdLevelSettings);
+
+// Mark function as a jest mock
+jest.mock("../client/thirdLevel", () => ({
+    getThirdLevelSettings: jest.fn(),
+}));
+
+// Once you have a mocked function, call mockImplementation on it 
+getThirdLevelSettingsMock.mockImplementation(() => {
+    return Promise.resolve({
+        ...{
+            issueTypeId: "issueTypeId",
+            linkDirection: "Parent Link",
+            linkTypeId: "linkTypeId",
+            projectId: "Project1",
+            lastUpdatedByUserId: updatedByUserId,
+        },
+    });
+});
+```
+
+### 2. Using `Jest.mock()`
+
+```js
+// Define the implementation of the getUser and putVote function by calling jest.mock on the file path, 
+jest.mock("../client/core", () => ({
+    getUser: jest.fn(() =>
+        Promise.resolve({
+            displayName: "test user",
+            accountId: "123",
+            avatarUrls: {
+                "48x48":
+                    "http://localhost:2990/useravatar",
+            },
+        })
+    ),
+    putVote: jest.fn(() => Promise.resolve()),
+)});
+```
+
+_**Note:** : But wait there is another way! If all you need is the return value of the promise but don't need to touch the implementation, you can use `mockResolvedValue()`. `mockResolvedValue` is synctatic sugar for `mockImplementation()` and only returns the resolved value of the mocked function!_
+```js
+mocked(getUser).mockResolvedValue({
+            displayName: "test user",
+            accountId: "123",
+            avatarUrls: {
+                "48x48":
+                    "http://localhost:2990/useravatar",
+            },
+        });
+// `mocked` or `jest.mocked` is used frequently to assign types to a function`
+```
+
+## Use case: Mocking modules.
+
+Let's use mocking requests to Bugsnag as an example. Manual mocks are defined by writing a module in a `__mocks__/ subdirectory` immediately adjacent to the module. If the module you are mocking is a node module, the mock should be placed in the `__mocks__ directory` adjacent to `node_modules` .
+
+In the `__mocks__` folder, define a file named `bugsnag.js` and then the following code block defines mocks for `bugsnag.notify()` and `bugsnag.leaveBreadcrumbs()`.
+
+```js
+export default {
+    notify: jest.fn(),
+    leaveBreadcrumb: jest.fn(),
+};
+```
+## Use case: Mocking Atlaskit modules.
+
+In a similar fashion to the above, we can also mock Atlaskit modules.
+In this case, we are mocking out the `@atlaskit/modal-dialog` component due to the test having an extremely long run time.
+
+```js
+jest.mock("@atlaskit/modal-dialog", () => ({
+    __esModule: true,
+    default: ({ children }: any) => <div>{children}</div>,
+    ModalTitle: ({ children }: any) => <h1>{children}</h1>,
+    ModalBody: ({ children }: any) => <div>{children}</div>,
+    ModalFooter: ({ children }: any) => <div>{children}</div>,
+    ModalHeader: ({ children }: any) => <div>{children}</div>,
+    ModalTransition: ({ children }: any) => <div>{children}</div>,
+}));
+```
+_**Note:**: When using the factory parameter for an ES6 module with a default export, the `__esModule: true` property needs to be specified._
+
+## Use-case: Mocking Redux Sagas.
+
+In Redux Sagas, you can mock function calls in the `.provide` block.
+
+```js
+return expectSaga(thirdLevelSagas)
+                    .provide([
+                        [
+                            matchers.call.fn(getLocalStorageLayout),
+                            LevelsLayout.GROUPED_BY_THIRD,
+                        ],
+                        [
+                            matchers.call(fetchEpicPage, totalFetchParams),
+                            totalFetchResult,
+                        ]
+                        ]
+                        );
+                        ...
+```
+
+You can mock a function one of 2 ways,
+
+  1. Using `call()` . To use `call()`, you need to provide arguments that the function accepts.
+  
+  ```js
+  // In this case, we are providing totalFetchParams to the function fetchEpicPage.
+  return expectSaga(thirdLevelSagas)
+                    .provide([
+                        [
+                            matchers.call(fetchEpicPage, totalFetchParams),
+                            totalFetchResult,
+                        ])
+                        ...
+  ```
+
+2. Using `call.fn()`. This is great to use if you only want to mock the return value and not the arguments.
+
+```js
+// In this case, we are NOT providing totalFetchParams to the function fetchEpicPage.
+return expectSaga(thirdLevelSagas)
+                    .provide([
+                        [
+                            matchers.call.fn(fetchEpicPage),
+                            totalFetchResult,
+                        ])
+                        ...
+```
+
+A great tip when wanting to mock behaviour in sagas is to look at the <a href="https://redux-saga-test-plan.jeremyfairbank.com/integration-testing/mocking/static-providers.html" target="_blank" rel="noopener">matchers</a> documentation.  
+I was able to mock a tricky race condition using `matchers.race(effects)` 😅.
+
+This is a living document and I will be adding to it when I run into more mocks I find confusing. If I’ve got something wrong, I’m all ears!
+
+Happy mocking!!
+
+

@@ -1,0 +1,34 @@
+---
+title: 'Improve and enjoy reviewing pull requests'
+abstract: It’s 3pm at work, you breathe a deep sigh of tiredness and walk over to your desk after your 10 min mid-day break. It’s finally time to tackle that massive PR review that you’ve been putting off the whole day.
+publishedOn: '2024-02-22T12:00:00-0400'
+---
+
+It’s 3pm at work, you breathe a deep sigh of tiredness and walk over to your desk after your 10 min mid-day break. It’s finally time to tackle that massive PR review that you’ve been putting off the whole day 😮‍💨 .
+
+You repeatedly find yourself drifting into daydreams, cycling through the same lines of code in the GitHub file diff without absorbing much. You resort to playing your productivity playlist on Spotify, in a futile attempt to focus and somehow transform those dense lines of code into coherent, understandable blocks of logic.
+
+“Surely there is a way to get better at this” you tell yourself and search the interweb for tips, processes, methods… hell anything.
+After some unsuccessful skimming of blogs, you get back to the slog.
+
+I really wanted to create a quality resource that I can refer to.
+After some experimentation, I have jotted down a few key points that I keep coming back to every-time I get that same dreadful feeling when reviewing PR’s:
+
+## Reviewing PR tips
+
+1. Approach the PR with an attitude of curiosity about the problem first, and then how someone has fixed this problem in code.
+This helps identify gaps in our understanding of how certain things work or may not work. This really expands and stretches our problem solving arsenal. What this also does is help us raise smarter questions or find better suggestions to solution implementations or raise legitimate gaps which the author may have not considered.
+I’ve discovered that adopting this simple mindset shift makes the process much more engaging and enjoyable compared to approaching it with the mindset of trying to uncover flaws in the reviewed code.
+
+2. Discover a coding environment where you feel at ease. For instance, while GitHub’s file difference feature fell short for me by not providing a comprehensive view and being quite 
+inconvenient, I stumbled upon the <a href="https://code.visualstudio.com/blogs/2018/09/10/introducing-github-pullrequests" target="_blank" rel="noopener">GitHub Pull Requests in Visual Studio Code extension</a>. It displays code changes within your VS Code setup, offering a comfortable environment. I found it highly beneficial; the ability to swiftly navigate between files, utilise keyboard shortcuts, and conduct codebase searches enhances engagement and facilitates understanding of the code.
+
+3. Concentrate on reviewing specific sections of the code. For instance, if it involves data fetching, thoroughly examine all aspects of how data is retrieved in the code and how it’s delivered to the components responsible for rendering it. Avoid delving into the details of CSS or React structure at this point. Once you’ve completed the review of that particular section, transition to another area, such as refining the visual elements, like CSS refactoring of components.
+4. Time box reviewing that PR. Be it 15-45 mins. Dedicate this time to just reviewing that PR. I’ve found this ensures not losing focus and makes it harder for your brain to drift away to when reviewing code.
+5. Pause and google things that are hard to understand/new. This is called active learning. This will greatly help your knowledge grow.
+
+Finally, viewing PR reviews as the learning section of your day is extremely powerful.
+Pose the question to yourself: What was the problem, and how did this engineer resolve it or construct this functionality in code? This presents an opportunity to glimpse into the minds of all engineers, especially the senior engineers in your team!
+
+Hope these tips help change your perception on PR reviews and help spark joy when reviewing PRs! 💥
+
