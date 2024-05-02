@@ -8,9 +8,14 @@ import styles from './postSlug.module.css';
 import dynamic from 'next/dynamic';
 // const DivisionGroupsDemo = dynamic(() => import("@/components/DivisionGroupsDemo/index"), { loading: Spinner });
 import Clapswrapper from '@/components/claps/ClapsWrapper';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }) {
   const post = await loadBlogPost(params.postSlug);
+  if (!post) {
+    return null;
+  }
+
   const {frontmatter, content } = post;
 
   return {
@@ -21,6 +26,13 @@ export async function generateMetadata({ params }) {
 
 async function BlogPost({params}) {
   const post = await loadBlogPost(params.postSlug);
+
+  // If there is no blog post with the slug taken from the route
+  // params, render a 404 page instead.
+  if (!post) {
+    notFound();
+  }
+
 const {frontmatter, content } = post;
   return (
     <article className={styles.wrapper}>
