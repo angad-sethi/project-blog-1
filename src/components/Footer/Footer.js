@@ -36,17 +36,14 @@ function Footer() {
           <h2 className={styles.linkHeading}>Links</h2>
           <ul className={styles.linkList}>
             <li>
-              <Link href="/rss">RSS feed</Link>
-            </li>
-            <li>
-              <Link href="/todo">Terms of Use</Link>
+              <Link href="/rss.xml">RSS feed</Link>
             </li>
             <li>
               <Link href="/todo">Privacy Policy</Link>
             </li>
             <li>
-              <a href="https://twitter.com/JoshWComeau">
-                Twitter
+              <a href="https://www.linkedin.com/in/angad-sethi-2590b4174/">
+                LinkedIn
               </a>
             </li>
           </ul>

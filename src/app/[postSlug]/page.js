@@ -6,8 +6,8 @@ import {loadBlogPost} from "@/helpers/file-helpers"
 import CodeSnippet from "@/components/CodeSnippet/index"
 import styles from './postSlug.module.css';
 import dynamic from 'next/dynamic';
-
 // const DivisionGroupsDemo = dynamic(() => import("@/components/DivisionGroupsDemo/index"), { loading: Spinner });
+import Claps1 from '@/components/claps/Claps1';
 
 export async function generateMetadata({ params }) {
   const post = await loadBlogPost(params.postSlug);
@@ -24,6 +24,7 @@ async function BlogPost({params}) {
 const {frontmatter, content } = post;
   return (
     <article className={styles.wrapper}>
+    <Claps1/>
       <BlogHero
         title={frontmatter.title}
         publishedOn={frontmatter.publishedOn}
