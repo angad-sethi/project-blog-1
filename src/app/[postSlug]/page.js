@@ -10,6 +10,16 @@ import dynamic from 'next/dynamic';
 import Clapswrapper from '@/components/claps/ClapsWrapper';
 import { notFound } from 'next/navigation';
 
+function ContentImage(props) {
+  return (
+    <img
+    src={props.src}
+    alt={props.alt}
+    />
+  );
+}
+ 
+
 export async function generateMetadata({ params }) {
   const post = await loadBlogPost(params.postSlug);
   if (!post) {
@@ -42,7 +52,7 @@ const {frontmatter, content } = post;
         publishedOn={frontmatter.publishedOn}
       />
       <div className={styles.page}>
-      <MDXRemote source={content} components={{pre: CodeSnippet}} />
+      <MDXRemote source={content} components={{pre: CodeSnippet, img: ContentImage}} />
       </div>
     </article>
   );
