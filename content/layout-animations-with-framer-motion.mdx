@@ -1,0 +1,103 @@
+---
+title: "Powerful layout animations with Framer motion"
+abstract: It simplifies a lot of complex animations and really enables us to deliver
+publishedOn: "2024-07-24T12:00:00-0400"
+---
+
+Framer motion is a powerful animation library. It simplifies a lot of complex animations and really enables us to deliver extremely delightful and purposeful
+user interfaces and experiences.
+However, I've found it's real value lies in making layout animations extremely easy to implement.
+
+A layout animation is an instance where a component's layout changes between two states and this state change is animated.
+
+Let's illustrate this with a real-world example. Imagine a scenario where a user can click a "reveal" button to see how many votes their teammates have assigned to a story. Our goal is to create the following effect: once the user clicks "reveal," we want the cards to rearrange in ascending order of votes after a 1-second delay.
+
+Below I've implemented this feature. Feel free to click around and understand how this works.
+
+<SandpackNoAnimation />{" "}
+
+I think it is safe to say that the above implementation
+looks janky/glitchy/snafu.
+
+Wouldn't it be nice if we could somehow re-arrange all the votes and users in a smooth fashion so that the user understands that we mean to re-arrange the votes in ascending order? Maybe something like this...
+
+<RevealVotesAnimation />
+
+Let's animate this with framer motion's <a href="https://www.framer.com/motion/" target="_blank" rel="noopener">layout animations.</a> (It actually blows my mind how easy it is add an animation to this):
+
+- Mark the div we want to animate as a `motion` component and set the attribute `layout` as true on it.
+  In this case we mark the div wrapping the vote object's `userId` and `estimate` in `EstimateVote.js`.
+
+```js
+switch (estimate) {
+  default:
+    return (
+      <motion.div layout>
+        {userId}
+        <div className={"estimateShown"}>{estimate}</div>
+      </motion.div>
+    );
+}
+```
+
+<SandpackAnimation />
+
+_**Note:** : You'll notice that I've added some more properties on the `motion` component. I would highly encourage you to change these values and see the changes in animation!_
+
+Framer motion offers an unreal amount of control on the animations themselves. I was playing around with the spring animation controls and it's actually ridiculous how accurate the spring physics of it gets.
+Check out the framer docs <a href="https://www.framer.com/motion/animation/" target="_blank" rel="noopener">here</a> to see what's possible!
+
+Phew, okay I don't know about you but I think that it looks pretty 🔥. Especially when compared to our initial version.
+
+### How does it work?
+
+Framer motion uses a technique called FLIP under the hood. FLIP stands for:
+
+- First - initial state of animation.
+- Last - final state of animation.
+- Invert - reversing or inverting the animation path.
+- Play - simulation step where the animation is advanced over time. return
+
+I've found <a href="https://www.nan.fyi/magic-motion#introducing-flip" target="\_blank" rel="noopener">this</a> article does an incredible job at explaining each of the steps with animations!
+(A bit meta I know).
+
+### Why not just use CSS for layout animations?
+
+The reason is two-fold:
+
+1. CSS animations that involve layout changes are typically more resource-intensive than transform-based animations, which may result in less smooth performance on lower-end devices. Framer motion uses transforms to animate everything which is quite a lot performant!
+2. Some properties like `justify-content` are not animatable using just CSS, but framer uses the transform method to make this possible!
+
+You can read further on this topic <a href="https://aerotwist.com/blog/flip-your-animations/" target="_blank" rel="noopener">here.</a>
+
+### Will it hike up my bundle size?
+
+Framer motion exports many functions, so the package size may look large on Bundlephobia (~50kb). However Javascript bundlers like Webpack and Rollup tree shake the unused functions and only the code imported is shipped to consumers which greatly reduces bundle size (as little as 1kb if a small hook is imported).
+The `motion` component is the core API. Because of its declarative, props-driven API, it's impossible for bundlers to tree shake it any smaller than 29kb.
+In lieu of this, framer-motion exports a slimmer variation of `motion` called `m` which doesn't come preloaded with features like animations, layout animations, or the drag gesture. It works the exact same as the `motion` component and loads in the features later using the `LazyMotion` component. This reduces the bundle size to just under 4.6kb for the initial render which is great!
+Read more <a href="https://www.framer.com/motion/guide-reduce-bundle-size/#how-to-reduce-the-size-of-the-motion-component" target="_blank" rel="noopener">here.</a>
+
+### Accessibility
+
+Operating systems provide a setting called "Reduce motion" that users can toggle, in order to disable animations. This control is in place since animations can potentially trigger physical symptoms like vertigo, nausea, and malaise for some.
+It is important to respect this setting and disable our animations if necessary. Framer motion exports a component called `MotionConfig` which we can use to disable animations if users have toggled reduce motion setting on.
+
+```js
+import React from "react";
+import { MotionConfig } from "framer-motion";
+
+function App() {
+  return (
+    <MotionConfig reducedMotion="user">
+      {/* The entire application here */}
+    </MotionConfig>
+  );
+}
+export default App;
+```
+
+Framer motion also exports a hook called `useReducedMotion` which returns true if the user has this setting toggled on. More info <a href="https://www.framer.com/motion/use-reduced-motion/" target="_blank" rel="noopener">here.</a>
+
+### Wrapping up
+
+I hope I've been successful in detailing just how easy it is to enable layout animations in our apps by leveraging Framer-motion and how powerful we are able to make these animations. Hopefully the flashes in your apps will be now catch your eye and you'll be well equipped to eliminate them!

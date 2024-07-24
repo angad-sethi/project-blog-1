@@ -10,6 +10,8 @@
     "new-component": "new-component"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "^2.18.0",
+    "@codesandbox/sandpack-themes": "^2.0.21",
     "@upstash/claps": "^1.0.0-beta.4",
     "bright": "0.8.4",
     "clsx": "1.2.1",
@@ -25,7 +27,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "2.0.10",
-    "rss": "^1.2.2"
+    "rss": "^1.2.2",
+    "styled-components": "^6.1.12"
   },
   "devDependencies": {
     "@types/node": "20.12.8"
