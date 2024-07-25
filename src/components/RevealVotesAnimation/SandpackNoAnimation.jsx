@@ -153,15 +153,12 @@ export const EstimateVote = ({ estimate, userId, showVote }) => {
     );
   }
 
-  switch (estimate) {
-    default:
       return (
         <div>
           {userId}
           <div className={"estimateShown"}>{estimate}</div>
         </div>
       );
-  }
 };
 `;
 

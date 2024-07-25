@@ -1,7 +1,7 @@
 ---
 title: "Powerful layout animations with Framer motion"
 abstract: It simplifies a lot of complex animations and really enables us to deliver
-publishedOn: "2024-07-24T12:00:00-0400"
+publishedOn: "2024-07-25T12:00:00-0400"
 ---
 
 Framer motion is a powerful animation library. It simplifies a lot of complex animations and really enables us to deliver extremely delightful and purposeful
@@ -29,15 +29,12 @@ Let's animate this with framer motion's <a href="https://www.framer.com/motion/"
   In this case we mark the div wrapping the vote object's `userId` and `estimate` in `EstimateVote.js`.
 
 ```js
-switch (estimate) {
-  default:
-    return (
-      <motion.div layout>
-        {userId}
-        <div className={"estimateShown"}>{estimate}</div>
-      </motion.div>
-    );
-}
+return (
+  <motion.div layout>
+    {userId}
+    <div className={"estimateShown"}>{estimate}</div>
+  </motion.div>
+);
 ```
 
 <SandpackAnimation />
@@ -100,4 +97,4 @@ Framer motion also exports a hook called `useReducedMotion` which returns true i
 
 ### Wrapping up
 
-I hope I've been successful in detailing just how easy it is to enable layout animations in our apps by leveraging Framer-motion and how powerful we are able to make these animations. Hopefully the flashes in your apps will be now catch your eye and you'll be well equipped to eliminate them!
+I hope I've been successful in detailing just how easy it is to enable layout animations in our apps by leveraging Framer-motion and how powerful we are able to make these animations. Hopefully the flashes in your apps will now catch your eye and you'll be well equipped to eliminate them!

@@ -155,8 +155,6 @@ export const EstimateVote = ({ estimate, userId, showVote }) => {
     );
   }
 
-  switch (estimate) {
-    default:
       return (
         <motion.div
           layout
@@ -174,7 +172,6 @@ export const EstimateVote = ({ estimate, userId, showVote }) => {
           <div className={"estimateShown"}>{estimate}</div>
         </motion.div>
       );
-  }
 };
 `;
 
