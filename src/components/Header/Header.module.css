@@ -33,6 +33,7 @@
 .action:hover {
   background: var(--color-decorative-100);
 }
+
 .action svg {
   display: block;
 }
