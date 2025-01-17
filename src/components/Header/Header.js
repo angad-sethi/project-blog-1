@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import clsx from "clsx";
-import { Rss, Sun, Moon, Coffee } from "react-feather";
+import { Rss, Sun, Moon, Coffee, Linkedin } from "react-feather";
 import Cookie from "js-cookie";
 import Logo from "@/components/Logo";
 import VisuallyHidden from "@/components/VisuallyHidden";
@@ -32,14 +32,17 @@ function Header({ initialTheme, className, ...delegated }) {
 
   return (
     <header className={clsx(styles.wrapper, className)} {...delegated}>
-      <Logo />
-      <Fire />
+      <div className={styles.logoAndfire}>
+        <Logo />
+        <Fire />
+      </div>
 
       <div className={styles.actions}>
         <Tooltip
           title="Play Wordle on your coffee break"
           placement="bottom"
           arrow
+          className={styles.alienMuiButton}
         >
           <a
             href="https://wordle.angadsethi.dev/"
@@ -66,6 +69,22 @@ function Header({ initialTheme, className, ...delegated }) {
             }}
           />
           <VisuallyHidden>View RSS feed</VisuallyHidden>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/angad-sethi-2590b4174/"
+          className={styles.action}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <Linkedin
+            size="1.5rem"
+            style={{
+              // Optical alignment
+              transform: "translate(2px, -2px)",
+            }}
+          />
+          <VisuallyHidden>LinkedIn</VisuallyHidden>
         </a>
         <button className={styles.action} onClick={flipTheme}>
           {theme == "light" ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}

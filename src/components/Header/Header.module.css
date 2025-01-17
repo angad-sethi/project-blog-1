@@ -16,6 +16,17 @@
   gap: 16px;
   align-items: center;
 }
+.alienMuiButton:hover {
+  --variant-containedBg: transparent;
+  --variant-textBg: transparent;
+  --variant-outlinedBorder: transparent;
+  --variant-outlinedBg: transparent;
+}
+
+.alienMuiButton {
+  padding: 0px;
+  min-width: 0px;
+}
 .action {
   display: block;
   border: none;
@@ -36,4 +47,8 @@
 
 .action svg {
   display: block;
+}
+
+.logoAndfire {
+  display: flex;
 }
