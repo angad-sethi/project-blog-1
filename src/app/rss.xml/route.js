@@ -1,10 +1,7 @@
-import RSS from 'rss';
+import RSS from "rss";
 
-import {
-  BLOG_TITLE,
-  BLOG_DESCRIPTION,
-} from '@/constants';
-import { getBlogPostList } from '@/helpers/file-helpers';
+import { BLOG_TITLE, BLOG_DESCRIPTION } from "@/constants";
+import { getBlogPostList } from "@/helpers/file-helpers";
 
 export async function GET() {
   // Create the feed using the RSS helper, and the metadata
@@ -34,7 +31,7 @@ export async function GET() {
   // it as XML, and not as plaintext.
   return new Response(feed.xml({ indent: true }), {
     headers: {
-      'Content-Type': 'application/xml',
+      "Content-Type": "application/xml",
     },
   });
 }

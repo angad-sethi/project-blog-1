@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
   const { frontmatter, content } = post;
 
   return {
-    title: `${frontmatter.title} . Angad's Blog`,
+    title: `${frontmatter.title} . Angad Sethi`,
     description: `${frontmatter.abstract}`,
   };
 }
