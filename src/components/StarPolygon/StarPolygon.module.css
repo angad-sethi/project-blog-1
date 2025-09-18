@@ -1,0 +1,16 @@
+.starPolygon {
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+  cursor: pointer;
+}
+
+.starPolygon polygon {
+  stroke-dasharray: 100, 10000;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 3000ms;
+}
+
+/* Trigger the drawing effect on hover or when loaded */
+.starPolygon:hover polygon {
+  stroke-dashoffset: 0;
+}
