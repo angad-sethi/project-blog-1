@@ -14,7 +14,7 @@ async function Home() {
     <div>
       <TabNavigation />
       <div className={styles.wrapper}>
-        <SearchLight />
+        <SearchLight label="Recently published" />
 
         {list.map((list) => (
           <BlogSummaryCard

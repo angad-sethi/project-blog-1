@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./SearchLight.module.css";
 
-function SearchLight() {
+function SearchLight({ label }) {
   return (
     <div className={styles.app}>
       <div className={styles.wrapper}>
@@ -10,7 +10,7 @@ function SearchLight() {
           <div className={styles.bulb}>❘</div>
         </div>
         <div className={styles.light}></div>
-        <h1 className={styles.text}>Recently published</h1>
+        <h1 className={styles.text}>{label}</h1>
       </div>
     </div>
   );

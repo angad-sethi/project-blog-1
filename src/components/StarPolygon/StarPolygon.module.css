@@ -4,13 +4,34 @@
   cursor: pointer;
 }
 
-.starPolygon polygon {
+.starPolygon .drawPolygon {
   stroke-dasharray: 100, 10000;
   stroke-dashoffset: 100;
   transition: stroke-dashoffset 3000ms;
 }
 
 /* Trigger the drawing effect on hover or when loaded */
-.starPolygon:hover polygon {
+.wrapper:hover .drawPolygon {
   stroke-dashoffset: 0;
 }
+
+.wrapper {
+  position: relative;
+}
+
+.wrapper span {
+  position: absolute;
+  top: 47%;
+  left: 35%;
+}
+
+.outlinePolygon {
+  stroke-dasharray: 100, 10000;
+  stroke-dashoffset: 0;
+  stroke-opacity: 0.125;
+  transition: stroke-dashoffset 3000ms;
+}
+
+/* .outlinePolygon:hover {
+  stroke-dashoffset: 0;
+} */

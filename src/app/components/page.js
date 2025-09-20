@@ -10,8 +10,8 @@ function ComponentLibraryPage() {
     <div>
       <TabNavigation />
       <div className={styles.wrapper}>
-        <SearchLight />
-        <Fire />
+        <SearchLight label="Search Light" />
+        <Fire width={70} height={70} left="0" />
         <StarPolygon />
         {/* TODO add magnetic Shavings effect */}
       </div>
