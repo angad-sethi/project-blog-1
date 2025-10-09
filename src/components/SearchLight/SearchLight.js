@@ -17,3 +17,4 @@ function SearchLight({ label }) {
 }
 
 export default SearchLight;
+// ploar coordinates

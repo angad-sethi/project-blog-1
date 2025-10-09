@@ -40,8 +40,8 @@
   cursor: pointer;
   transition: background 200ms;
 }
-.action:hover {
-  background: var(--color-decorative-100);
+.action:hover svg {
+  opacity: 1;
 }
 
 .action svg {
@@ -50,4 +50,8 @@
 
 .logoAndfire {
   display: flex;
+}
+
+.actions svg {
+  opacity: 0.8;
 }
