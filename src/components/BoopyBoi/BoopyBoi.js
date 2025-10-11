@@ -11,7 +11,7 @@ function BoopyBoi() {
   const [style, trigger] = useBoop(boopConfig);
 
   return (
-    <animated.span onMouseEnter={trigger} style={style}>
+    <animated.span onMouseEnter={trigger} style={{ ...style, width: "40px" }}>
       <Headphones size={40} />
     </animated.span>
   );

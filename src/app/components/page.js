@@ -5,6 +5,7 @@ import styles from "./components.module.css";
 import Fire from "@/components/Fire";
 import StarPolygon from "@/components/StarPolygon";
 import BoopyBoi from "@/components/BoopyBoi";
+import MagneticFillings from "@/components/MagneticFillings";
 
 function ComponentLibraryPage() {
   return (
@@ -12,10 +13,10 @@ function ComponentLibraryPage() {
       <TabNavigation />
       <div className={styles.wrapper}>
         <SearchLight label="Search Light" />
+        <MagneticFillings />
         <Fire width={70} height={70} left="0" />
         <StarPolygon />
         <BoopyBoi />
-        {/* TODO add magnetic Shavings effect */}
       </div>
     </div>
   );
