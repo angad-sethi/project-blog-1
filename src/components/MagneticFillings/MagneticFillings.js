@@ -4,20 +4,20 @@ import { usePointerPosition } from "motion-plus/react";
 import { motion, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-function Filing({ isHovered }) {
+function Filing({ isHovered, isActive, isAnimationComplete }) {
   const pointer = usePointerPosition();
   const filingRef = useRef(null);
   const [centerX, setCenterX] = useState(null);
   const [centerY, setCenterY] = useState(null);
 
-  // Measure the filing's position on mount
+  // Measure the filing's position only after animation completes
   useEffect(() => {
-    if (filingRef.current) {
+    if (isActive && isAnimationComplete && filingRef.current) {
       const rect = filingRef.current.getBoundingClientRect();
       setCenterX(rect.left + rect.width / 2);
       setCenterY(rect.top + rect.height / 2);
     }
-  }, []);
+  }, [isActive, isAnimationComplete]);
 
   // Calculate angle from filing position to cursor position
   const rotate = useTransform(() => {
@@ -36,7 +36,11 @@ function Filing({ isHovered }) {
   return <motion.div ref={filingRef} className="filing" style={{ rotate }} />;
 }
 
-export default function MagneticFillings({ size = 16 }) {
+export default function MagneticFillings({
+  size = 16,
+  isActive,
+  isAnimationComplete,
+}) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -54,7 +58,12 @@ export default function MagneticFillings({ size = 16 }) {
         }}
       >
         {Array.from({ length: size * size }).map((_, index) => (
-          <Filing key={index} isHovered={isHovered} />
+          <Filing
+            key={index}
+            isHovered={isHovered}
+            isActive={isActive}
+            isAnimationComplete={isAnimationComplete}
+          />
         ))}
       </div>
 

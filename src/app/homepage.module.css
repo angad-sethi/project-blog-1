@@ -2,8 +2,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 48px;
   width: 100%;
   max-width: var(--content-width);
   padding: 64px var(--viewport-padding);
+  margin: 0 auto;
+}
+
+.pageContainer {
+  width: 100%;
+  max-width: var(--content-width);
+  padding: 0 var(--viewport-padding);
+  margin: 0 auto;
+}
+
+.viewsContainer {
+  position: relative;
+  width: 100%;
   margin: 0 auto;
 }

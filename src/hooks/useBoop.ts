@@ -7,7 +7,7 @@ function useBoop({
   y = 0,
   rotation = 0,
   scale = 1,
-  timing = 150,
+  timing = 175,
   springConfig = {
     tension: 300,
     friction: 10,
